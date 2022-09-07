@@ -1,0 +1,178 @@
+// C++ code
+// Tp Grupal 
+// 
+
+#define A 10
+#define B 11
+#define C 2
+#define D 3
+#define E 4
+#define F 9
+#define G 8
+#define TIRA 1
+
+#include <Adafruit_NeoPixel.h>
+
+#define PIN 1	 // input pin Neopixel is attached to
+
+#define NUMPIXELS 10 // number of neopixels in Ring
+
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+int tiempo = 0; // timing delay
+
+int redColor = 0;
+int greenColor = 0;
+int blueColor = 0;
+
+void mostrarNumero(int a,int b, int c, int d, int e, int f, int g);
+void prenderTira(int cantidad);
+void apagarTira(int cantidad);
+
+void setup()
+{
+  pinMode(A,OUTPUT);
+  pinMode(B,OUTPUT);
+  pinMode(C,OUTPUT);
+  pinMode(D,OUTPUT);
+  pinMode(E,OUTPUT);
+  pinMode(F,OUTPUT);
+  pinMode(G,OUTPUT);
+  
+  pinMode(13,OUTPUT);
+  
+  pixels.begin();
+}
+
+void loop()
+{
+  
+  
+  //Cero
+  prenderTira(0);
+  digitalWrite(13, 0);
+  mostrarNumero(1,1,1,1,1,1,0);
+  delay(500);
+
+  //Uno
+  prenderTira(1);
+  digitalWrite(13, 1);
+  mostrarNumero(0,1,1,0,0,0,0);
+  delay(500);
+  
+ 
+  
+  //Dos
+  prenderTira(2);
+  digitalWrite(13, 0);
+  mostrarNumero(1,1,0,1,1,0,1);
+  delay(500);
+  
+  
+  //Tres
+  prenderTira(3);
+  digitalWrite(13, 1);
+  mostrarNumero(1,1,1,1,0,0,1);
+  delay(500);
+  
+  
+  //Cuatro
+  prenderTira(4);
+  digitalWrite(13, 0);
+  mostrarNumero(0,1,1,0,0,1,1);
+  delay(500);
+  
+  
+  //Cinco
+  prenderTira(5);
+  digitalWrite(13, 1);
+  mostrarNumero(1,0,1,1,0,1,1);
+  delay(500);
+  
+  //Seis
+  prenderTira(6);
+  digitalWrite(13, 0);
+  mostrarNumero(1,0,1,1,1,1,1);
+  delay(500);
+  
+  //Siete
+  prenderTira(7);
+  digitalWrite(13, 1);
+  mostrarNumero(1,1,1,0,0,0,0);
+  delay(500);
+  
+  //Ocho
+  prenderTira(8);
+  digitalWrite(13, 0);
+  mostrarNumero(1,1,1,1,1,1,1);
+  delay(500);
+  
+  //Nueve
+  prenderTira(9);
+  digitalWrite(13, 1);
+  mostrarNumero(1,1,1,0,0,1,1);
+  delay(500);
+  
+  apagarTira(10);
+}
+
+void mostrarNumero(int a,int b, int c, int d, int e, int f, int g)
+{
+  digitalWrite(A, a);
+  digitalWrite(B, b);
+  digitalWrite(C, c);
+  digitalWrite(D, d);
+  digitalWrite(E, e);
+  digitalWrite(F, f);
+  digitalWrite(G, g);
+  delay(1000);
+}
+
+void prenderTira(int cantidad)
+{
+  setColor();
+  for(int i=0;i<cantidad;i++)
+  {
+
+    // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
+    pixels.setPixelColor(i, pixels.Color(redColor, greenColor, blueColor)); // Moderately bright green color.
+
+    pixels.show(); // This sends the updated pixel color to the hardware.
+
+    delay(50); // Delay for a period of time (in milliseconds).
+
+    // Serial.println(i);
+  }
+}
+
+void apagarTira(int cantidad)
+{
+  setColor();
+  for(int i=0;i<cantidad;i++)
+  {
+
+    // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
+    pixels.setPixelColor(i, pixels.Color(0, 0, 0)); // Moderately bright green color.
+
+    pixels.show(); // This sends the updated pixel color to the hardware.
+
+    delay(50); // Delay for a period of time (in milliseconds).
+
+    // Serial.println(i);
+  }
+}
+
+void setColor()
+{
+  redColor = random(0, 255);
+  greenColor = random(0,255);
+  blueColor = random(0, 255);
+  Serial.print("red: ");
+  Serial.println(redColor);
+  Serial.print("green: ");
+  Serial.println(greenColor);
+  Serial.print("blue: ");
+  Serial.println(blueColor);
+}
+
+// Tinkercard: https://www.tinkercad.com/things/4H92ZHXtlo7-copy-of-3-2-e/editel?sharecode=1xZEBwYkOKGrOP9nbuyErybd-JiPajvfcYBLLxeEkhs
